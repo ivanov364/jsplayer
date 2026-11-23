@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' file: blob:; img-src 'self' data: blob:" />
+    <title>JSplayer</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="logo">J</div>
+          <div>
+            <span class="eyebrow">Audio player</span>
+            <h1>JSplayer</h1>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="chooseFilesBtn" class="primary">Add song</button>
+          <button id="chooseFolderBtn" class="secondary">Add album</button>
+          <button id="loadPlaylistBtn" class="secondary">Load</button>
+          <button id="savePlaylistBtn" class="secondary">Save</button>
+          <button id="newPlaylistBtn" class="secondary">New</button>
+          <button id="exitBtn" class="secondary">Exit</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="player-card">
+          <div class="player-topline">
+            <span class="track-badge">Now playing</span>
+            <span>JS / <span class="track-number">01</span></span>
+          </div>
+          <div class="track-art" aria-hidden="true">J</div>
+          <div>
+            <p id="nowPlaying">No track selected</p>
+            <p id="status" role="status" aria-live="polite">Choose audio to start your listening session.</p>
+            <audio id="player" controls></audio>
+            <div class="playback-actions" role="group" aria-label="Track navigation">
+              <button id="previousTrackBtn" class="secondary" type="button" disabled>← Previous</button>
+              <button id="nextTrackBtn" class="primary" type="button" disabled>Next →</button>
+            </div>
+            <div class="mode-bar" role="group" aria-label="Playback mode">
+              <span class="mode-label">Play mode</span>
+              <button class="mode-button" type="button" data-playback-mode="sequential">Sequential</button>
+              <button class="mode-button" type="button" data-playback-mode="random">Random</button>
+              <button class="mode-button" type="button" data-playback-mode="shuffle">Shuffle</button>
+            </div>
+            <section class="playback-order" aria-labelledby="playbackOrderHeading">
+              <div class="playback-order-header">
+                <h2 id="playbackOrderHeading">Playing order</h2>
+                <span id="queueCount">No songs queued</span>
+              </div>
+              <ol id="playbackQueueList" aria-live="polite"></ol>
+            </section>
+          </div>
+        </section>
+
+        <aside class="playlist-card">
+          <div class="playlist-header">
+            <div class="playlist-heading">
+              <h2>Playlist</h2>
+              <span id="songCount">0 tracks</span>
+            </div>
+            <div class="playlist-tools" aria-label="Playlist sorting">
+              <button id="sortArtistsBtn" class="secondary compact" type="button">Sort artists</button>
+              <button id="sortTracksBtn" class="secondary compact" type="button">Sort selected album</button>
+              <span id="selectedAlbumStatus" aria-live="polite"></span>
+            </div>
+          </div>
+          <ul id="songList" aria-live="polite"></ul>
+        </aside>
+      </main>
+    </div>
+
+    <input id="audioFileInput" type="file" accept=".mp3,.flac" multiple hidden />
+    <input id="audioFolderInput" type="file" accept=".mp3,.flac" webkitdirectory multiple hidden />
+    <script src="doubly-linked-list.js"></script>
+    <script src="circular-doubly-linked-list.js"></script>
+    <script src="playback-queue.js"></script>
+    <script src="renderer.js"></script>
+  </body>
+</html>
